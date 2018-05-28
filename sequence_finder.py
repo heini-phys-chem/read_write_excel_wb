@@ -33,15 +33,15 @@ if __name__ == "__main__":
   sheet = rb.sheet_by_index(0)
 
   # number of rows (number of animals)
-  numAnimals = sheet.nrows 
-  end_row = sheet.ncols
+  numAnimals = sheet.nrows - 1
+  end_row = sheet.ncols - 3
 
   # declare lists
   lists, counters, totals = [ [] for i in range(3) ]
 
   # read in sequencies and store them as lists
-  for i in range(numAnimals):
-    lists.append(list(str(sheet.cell(i,1).value)))
+  for i in range(1,numAnimals+1):
+    lists.append(list(str(sheet.cell(i,4).value)))
 
   # get number of 'good' sequencies
   for lst in lists:
@@ -53,10 +53,10 @@ if __name__ == "__main__":
   wb = copy(rb)
   sheet = wb.get_sheet(0)
 
-  for i in range(numAnimals):
-    sheet.write(i, end_row, counters[i])
-    sheet.write(i, end_row + 1, totals[i])
-    sheet.write(i, end_row + 2, "%.2f" % ( float(counters[i]) / float(totals[i]) * 100) )
-  
+  for i in range(1,numAnimals+1):
+    sheet.write(i, end_row, counters[i-1])
+    sheet.write(i, end_row + 1, totals[i-1])
+    sheet.write(i, end_row + 2, "%.2f" % ( float(counters[i-1]) / float(totals[i-1]) * 100) )
+
   # save woekbook
   wb.save(filename)
