@@ -6,4 +6,4 @@
 modules needed for this script: xlwt xlrd xlutils
 
 install as follow:
-sudo pip install <module>
+sudo pip install < module >
